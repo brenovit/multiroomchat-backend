@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import io.github.brenovit.messagingstompwebsocket.exception.EmailAlreadyExistsException;
 import io.github.brenovit.messagingstompwebsocket.exception.UsernameAlreadyExistsException;
@@ -18,6 +19,7 @@ import io.github.brenovit.messagingstompwebsocket.user.repository.UserRepository
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Service
 public class UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
