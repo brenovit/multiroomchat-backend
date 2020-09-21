@@ -17,9 +17,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 import io.github.brenovit.messagingstompwebsocket.user.service.JwtTokenProvider;
 import io.github.brenovit.messagingstompwebsocket.user.service.UserService;
@@ -73,23 +70,5 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-    }
-
-    @Bean
-    public CorsFilter corsFilter() {
-        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        final CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("OPTIONS");
-        config.addAllowedMethod("HEAD");
-        config.addAllowedMethod("GET");
-        config.addAllowedMethod("PUT");
-        config.addAllowedMethod("POST");
-        config.addAllowedMethod("DELETE");
-        config.addAllowedMethod("PATCH");
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
     }
 }
