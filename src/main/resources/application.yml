@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      database: instaclone_auth
+      database: chat_service
       port: 27017
 
 server:

@@ -68,7 +68,8 @@ public class User {
         this.roles = user.roles;
     }
 
-    public User(String username, String password, String email) {
+    @SuppressWarnings("serial")
+	public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;

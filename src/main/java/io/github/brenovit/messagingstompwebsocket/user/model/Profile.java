@@ -1,8 +1,11 @@
 package io.github.brenovit.messagingstompwebsocket.user.model;
 
-import lombok.*;
 import java.util.Date;
-import java.util.Set;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Data
