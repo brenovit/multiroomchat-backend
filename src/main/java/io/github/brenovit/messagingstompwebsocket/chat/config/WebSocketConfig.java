@@ -1,4 +1,4 @@
-package io.github.brenovit.messagingstompwebsocket.chat.copy;
+package io.github.brenovit.messagingstompwebsocket.chat.config;
 
 import java.util.List;
 

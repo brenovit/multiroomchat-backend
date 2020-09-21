@@ -1,28 +1,45 @@
 package io.github.brenovit.messagingstompwebsocket.chat.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.util.HtmlUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import io.github.brenovit.messagingstompwebsocket.chat.model.ChatMessage;
-import lombok.extern.slf4j.Slf4j;
+import io.github.brenovit.messagingstompwebsocket.chat.service.ChatService;
 
-@Slf4j
 @Controller
 public class ChatController {
-	
+
 	@Autowired
-	private ChatService chatService;
-		
+	private ChatService chatMessageService;
+
 	@MessageMapping("/chat")
-	@SendTo("/topic/greetings")
-	public ChatMessage greeting(@Payload HelloMessage message) throws InterruptedException {
-		log.info("Received message: "+message.toString());
-		Thread.sleep(500);
-		return new ChatMessage("Hello "+HtmlUtils.htmlEscape(message.getName())+"!");
+	public void processMessage(@Payload ChatMessage chatMessage) {
+		chatMessageService.processMessage(chatMessage);
 	}
-	
+
+	@GetMapping("/messages/{senderId}/{recipientId}/count")
+	public ResponseEntity<Long> countNewMessages(
+			@PathVariable String senderId, 
+			@PathVariable String recipientId) {
+		return ResponseEntity.ok(chatMessageService.countNewMessages(senderId, recipientId));
+	}
+
+	@GetMapping("/messages/{senderId}/{recipientId}")
+	public ResponseEntity<?> findChatMessages(
+			@PathVariable String senderId, 
+			@PathVariable String recipientId) {
+		return ResponseEntity.ok(chatMessageService.findChatMessages(senderId, recipientId));
+	}
+
+	@GetMapping("/messages/{id}")
+	public ResponseEntity<?> findMessage(
+			@PathVariable String id) {
+		return ResponseEntity.ok(chatMessageService.findById(id));
+	}
+
 }
