@@ -20,9 +20,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
-		config.enableSimpleBroker("/user");
+		config.enableSimpleBroker("/topic");
 		config.setApplicationDestinationPrefixes("/app");
-		config.setUserDestinationPrefix("/user");
+		//config.setUserDestinationPrefix("/user");
 	}
 	
 	@Override
@@ -32,8 +32,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 			.withSockJS();
 	}
 
-	@Override
-	public boolean configureMessageConverters(List<MessageConverter> messageConverters) {
+	
+	public boolean configureMessageConvertersOld(List<MessageConverter> messageConverters) {
 		DefaultContentTypeResolver resolver = new DefaultContentTypeResolver();
 		resolver.setDefaultMimeType(MimeTypeUtils.APPLICATION_JSON);
 		MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();

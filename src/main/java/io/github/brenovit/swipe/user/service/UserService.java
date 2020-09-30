@@ -21,13 +21,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class UserService {
-	@Autowired
+	
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
+	
 	private AuthenticationManager authenticationManager;
-	@Autowired
+	
 	private JwtTokenProvider tokenProvider;
 
 	public String loginUser(String username, String password) {

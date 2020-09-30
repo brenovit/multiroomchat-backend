@@ -21,24 +21,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import io.github.brenovit.swipe.user.service.JwtTokenProvider;
 import io.github.brenovit.swipe.user.service.UserService;
 
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
+public class SecurityCredentialsConfig {
 
-    @Autowired
+
     private UserDetailsService userDetailsService;
 
-    @Autowired
+
     private JwtConfig jwtConfig;
 
-    @Autowired
+
     private JwtTokenProvider tokenProvider;
 
-    @Autowired
+
     private UserService userService;
 
 
-    @Override
+
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .cors().and()
@@ -47,7 +45,7 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
-                .addFilterBefore(new JwtTokenAuthenticationFilter(jwtConfig, tokenProvider, userService), UsernamePasswordAuthenticationFilter.class)
+                //.addFilterBefore(new JwtTokenAuthenticationFilter(jwtConfig, tokenProvider, userService), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/signin").permitAll()
                 .antMatchers(HttpMethod.POST, "/users").anonymous()
@@ -55,7 +53,6 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
     }
 
-    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // Configure DB authentication provider for user accounts
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -66,9 +63,9 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean(BeanIds.AUTHENTICATION_MANAGER)
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+//    @Bean(BeanIds.AUTHENTICATION_MANAGER)
+//    @Override
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return super.authenticationManagerBean();
+//    }
 }

@@ -1,6 +1,5 @@
 package io.github.brenovit.swipe.chat.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -10,11 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import io.github.brenovit.swipe.chat.model.ChatMessage;
 import io.github.brenovit.swipe.chat.service.ChatService;
+import lombok.AllArgsConstructor;
 
 @Controller
+@AllArgsConstructor
 public class ChatController {
-
-	@Autowired
+	
 	private ChatService chatMessageService;
 
 	@MessageMapping("/chat")

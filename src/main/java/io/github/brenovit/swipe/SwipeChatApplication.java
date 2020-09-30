@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 
 @EnableMongoAuditing
 @SpringBootApplication
-public class MultiroomchatStompWebsocketApplication {
+public class SwipeChatApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MultiroomchatStompWebsocketApplication.class, args);
+		SpringApplication.run(SwipeChatApplication.class, args);
 	}
 }

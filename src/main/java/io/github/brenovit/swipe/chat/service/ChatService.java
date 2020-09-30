@@ -17,8 +17,10 @@ import io.github.brenovit.swipe.chat.model.MessageStatus;
 import io.github.brenovit.swipe.chat.repository.ChatMessageRepository;
 import io.github.brenovit.swipe.exception.ResourceNotFoundException;
 import io.github.brenovit.swipe.room.service.RoomService;
+import lombok.extern.log4j.Log4j2;
 
 @Service
+@Log4j2
 public class ChatService {
 
 	@Autowired
@@ -67,12 +69,15 @@ public class ChatService {
 	}
 
 	public void processMessage(ChatMessage chatMessage) {
-		var chatId = chatRoomService.getChatId(chatMessage.getSenderId(), chatMessage.getRecipientId(), true);
-		chatMessage.setChatId(chatId.get());
+		log.info("Received: "+chatMessage);
+		//var chatId = chatRoomService.getChatId(chatMessage.getSenderId(), chatMessage.getRecipientId(), true);
+		//chatMessage.setChatId(chatId.get());
 
 		ChatMessage saved = save(chatMessage);
-		messagingTemplate.convertAndSendToUser(chatMessage.getRecipientId(), "/queue/messages",
-				new ChatNotification(saved.getId(), saved.getSenderId(), saved.getSenderName()));
+//		messagingTemplate.convertAndSendToUser(chatMessage.getRecipientId(), "/queue/messages",
+//				new ChatNotification(saved.getId(), saved.getSenderId(), saved.getSenderName()));
+		messagingTemplate.convertAndSend("/topic/chat", new ChatNotification(saved.getId(), saved.getSenderId(), saved.getSenderName()));
+		//this.template.convertAndSend(TOPIC_URI + chatName, message);
 
 	}
 }

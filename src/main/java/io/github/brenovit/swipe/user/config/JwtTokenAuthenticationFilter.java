@@ -17,7 +17,7 @@ import io.github.brenovit.swipe.user.service.JwtTokenProvider;
 import io.github.brenovit.swipe.user.service.UserService;
 import io.jsonwebtoken.Claims;
 
-public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
+public class JwtTokenAuthenticationFilter  {
 
     private final JwtConfig jwtConfig;
     private JwtTokenProvider tokenProvider;
@@ -33,7 +33,6 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
         this.userService = userService;
     }
 
-    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
