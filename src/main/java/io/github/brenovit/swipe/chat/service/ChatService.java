@@ -69,14 +69,16 @@ public class ChatService {
 	}
 
 	public void processMessage(ChatMessage chatMessage) {
-		log.info("Received: "+chatMessage);
+		log.info("Received: "+chatMessage.toString());
 		//var chatId = chatRoomService.getChatId(chatMessage.getSenderId(), chatMessage.getRecipientId(), true);
 		//chatMessage.setChatId(chatId.get());
 
 		ChatMessage saved = save(chatMessage);
 //		messagingTemplate.convertAndSendToUser(chatMessage.getRecipientId(), "/queue/messages",
 //				new ChatNotification(saved.getId(), saved.getSenderId(), saved.getSenderName()));
-		messagingTemplate.convertAndSend("/topic/chat", new ChatNotification(saved.getId(), saved.getSenderId(), saved.getSenderName()));
+		chatMessage.setCount(chatMessage.getCount() +1);
+		messagingTemplate.convertAndSend("/topic/chat", chatMessage);
+		messagingTemplate.convertAndSend("/topic/notification", chatMessage.getCount());
 		//this.template.convertAndSend(TOPIC_URI + chatName, message);
 
 	}

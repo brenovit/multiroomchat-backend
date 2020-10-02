@@ -27,10 +27,9 @@ import io.github.brenovit.swipe.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RestController
-@RequestMapping("/auth")
+
 public class AuthController {
-	@Autowired private UserService userService;
+	private UserService userService;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {

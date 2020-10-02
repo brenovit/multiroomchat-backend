@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 
 import io.github.brenovit.swipe.user.model.UserDetailsImpl;
 
-@Service
-public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
+public class UserDetailsServiceImpl{
+
+
     private UserService userService;
 
-    @Override
+    
     public UserDetailsImpl loadUserByUsername(String username) throws UsernameNotFoundException {
 
         return userService

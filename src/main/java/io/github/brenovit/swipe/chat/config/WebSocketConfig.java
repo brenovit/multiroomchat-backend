@@ -10,13 +10,15 @@ import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+public class WebSocketConfig implements WebSocketConfigurer, WebSocketMessageBrokerConfigurer {
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
@@ -31,6 +33,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 			.setAllowedOrigins("*")
 			.withSockJS();
 	}
+	
+	
 
 	
 	public boolean configureMessageConvertersOld(List<MessageConverter> messageConverters) {
@@ -41,5 +45,11 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 		converter.setContentTypeResolver(resolver);
 		messageConverters.add(converter);
 		return false;		
+	}
+
+	@Override
+	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+		registry.addHandler(new WebSocketHandler(), "/user");
+		
 	}
 }

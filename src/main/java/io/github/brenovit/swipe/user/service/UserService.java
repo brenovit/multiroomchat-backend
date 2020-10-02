@@ -19,7 +19,6 @@ import io.github.brenovit.swipe.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Service
 public class UserService {
 	
 	private PasswordEncoder passwordEncoder;

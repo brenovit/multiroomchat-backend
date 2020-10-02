@@ -8,8 +8,8 @@ server:
   port: 8081
       
 security:
-  basic:
-    enable: false
+  #basic:
+    #enable: false
 
   jwt:
     uri: /auth/**

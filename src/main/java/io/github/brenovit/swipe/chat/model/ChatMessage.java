@@ -6,9 +6,11 @@ import org.springframework.data.annotation.Id;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class ChatMessage {
 	@Id
 	private String id;
@@ -20,4 +22,5 @@ public class ChatMessage {
 	private String content;
 	private Date timestamp;
 	private MessageStatus status;
+	private Long count;
 }
