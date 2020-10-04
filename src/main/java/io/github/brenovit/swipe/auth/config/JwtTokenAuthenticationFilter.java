@@ -1,4 +1,4 @@
-package io.github.brenovit.swipe.user.config;
+package io.github.brenovit.swipe.auth.config;
 
 import java.io.IOException;
 
@@ -12,8 +12,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import io.github.brenovit.swipe.auth.service.JwtTokenProvider;
 import io.github.brenovit.swipe.user.model.UserDetailsImpl;
-import io.github.brenovit.swipe.user.service.JwtTokenProvider;
 import io.github.brenovit.swipe.user.service.UserService;
 import io.jsonwebtoken.Claims;
 

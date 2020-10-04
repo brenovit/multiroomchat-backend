@@ -1,4 +1,4 @@
-package io.github.brenovit.swipe.user.payload;
+package io.github.brenovit.swipe.auth.payload;
 
 import lombok.Data;
 

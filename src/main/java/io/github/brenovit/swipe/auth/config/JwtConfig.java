@@ -1,4 +1,4 @@
-package io.github.brenovit.swipe.user.config;
+package io.github.brenovit.swipe.auth.config;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

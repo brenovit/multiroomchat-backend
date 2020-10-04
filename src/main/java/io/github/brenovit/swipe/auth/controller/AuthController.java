@@ -1,4 +1,4 @@
-package io.github.brenovit.swipe.user.controller;
+package io.github.brenovit.swipe.auth.controller;
 
 import java.net.URI;
 
@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.github.brenovit.swipe.auth.payload.JwtAuthenticationResponse;
+import io.github.brenovit.swipe.auth.payload.LoginRequest;
+import io.github.brenovit.swipe.auth.payload.SignUpRequest;
 import io.github.brenovit.swipe.exception.BadRequestException;
 import io.github.brenovit.swipe.exception.EmailAlreadyExistsException;
 import io.github.brenovit.swipe.exception.UsernameAlreadyExistsException;
@@ -20,9 +23,6 @@ import io.github.brenovit.swipe.user.model.Profile;
 import io.github.brenovit.swipe.user.model.Role;
 import io.github.brenovit.swipe.user.model.User;
 import io.github.brenovit.swipe.user.payload.ApiResponse;
-import io.github.brenovit.swipe.user.payload.JwtAuthenticationResponse;
-import io.github.brenovit.swipe.user.payload.LoginRequest;
-import io.github.brenovit.swipe.user.payload.SignUpRequest;
 import io.github.brenovit.swipe.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 

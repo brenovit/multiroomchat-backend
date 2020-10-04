@@ -1,4 +1,4 @@
-package io.github.brenovit.swipe.user.service;
+package io.github.brenovit.swipe.auth.service;
 
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
-import io.github.brenovit.swipe.user.config.JwtConfig;
+import io.github.brenovit.swipe.auth.config.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

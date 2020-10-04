@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import io.github.brenovit.swipe.auth.service.JwtTokenProvider;
 import io.github.brenovit.swipe.exception.EmailAlreadyExistsException;
 import io.github.brenovit.swipe.exception.UsernameAlreadyExistsException;
 import io.github.brenovit.swipe.user.model.Role;

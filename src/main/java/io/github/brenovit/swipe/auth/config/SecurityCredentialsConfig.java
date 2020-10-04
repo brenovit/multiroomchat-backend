@@ -1,4 +1,4 @@
-package io.github.brenovit.swipe.user.config;
+package io.github.brenovit.swipe.auth.config;
 
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import io.github.brenovit.swipe.user.service.JwtTokenProvider;
+import io.github.brenovit.swipe.auth.service.JwtTokenProvider;
 import io.github.brenovit.swipe.user.service.UserService;
 
 public class SecurityCredentialsConfig {
