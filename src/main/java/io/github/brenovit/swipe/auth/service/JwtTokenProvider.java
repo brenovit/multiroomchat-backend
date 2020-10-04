@@ -1,10 +1,5 @@
 package io.github.brenovit.swipe.auth.service;
 
-import java.util.Date;
-import java.util.stream.Collectors;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import io.github.brenovit.swipe.auth.config.JwtConfig;
@@ -12,7 +7,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.extern.slf4j.Slf4j;
@@ -28,18 +22,18 @@ public class JwtTokenProvider {
         this.jwtConfig = jwtConfig;
     }
 
-    public String generateToken(Authentication authentication) {
-
-        Long now = System.currentTimeMillis();
-        return Jwts.builder()
-                .setSubject(authentication.getName())
-                .claim("authorities", authentication.getAuthorities().stream()
-                        .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
-                .setIssuedAt(new Date(now))
-                .setExpiration(new Date(now + jwtConfig.getExpiration() * 1000))  // in milliseconds
-                .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes())
-                .compact();
-    }
+//    public String generateToken(Authentication authentication) {
+//
+//        Long now = System.currentTimeMillis();
+//        return Jwts.builder()
+//                .setSubject(authentication.getName())
+//                .claim("authorities", authentication.getAuthorities().stream()
+//                        .map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+//                .setIssuedAt(new Date(now))
+//                .setExpiration(new Date(now + jwtConfig.getExpiration() * 1000))  // in milliseconds
+//                .signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes())
+//                .compact();
+//    }
 
     public Claims getClaimsFromJWT(String token) {
         return Jwts.parser()

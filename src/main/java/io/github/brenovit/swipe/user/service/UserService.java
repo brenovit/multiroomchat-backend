@@ -5,11 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import io.github.brenovit.swipe.auth.service.JwtTokenProvider;
 import io.github.brenovit.swipe.exception.EmailAlreadyExistsException;
@@ -22,19 +17,20 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserService {
 	
-	private PasswordEncoder passwordEncoder;
+	//private PasswordEncoder passwordEncoder;
 	@Autowired
 	private UserRepository userRepository;
 	
-	private AuthenticationManager authenticationManager;
+	//private AuthenticationManager authenticationManager;
 	
 	private JwtTokenProvider tokenProvider;
 
 	public String loginUser(String username, String password) {
-		Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-
-		return tokenProvider.generateToken(authentication);
+//		Authentication authentication = authenticationManager
+//				.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+//
+//		return tokenProvider.generateToken(authentication);
+		return "";
 	}
 
 	@SuppressWarnings("serial")
@@ -53,7 +49,7 @@ public class UserService {
 			throw new EmailAlreadyExistsException(String.format("email %s already exists", user.getEmail()));
 		}
 		user.setActive(true);
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		//user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setRoles(new HashSet<>() {
 			{
 				add(role);

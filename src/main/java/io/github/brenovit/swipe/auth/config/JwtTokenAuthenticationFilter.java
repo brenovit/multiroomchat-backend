@@ -7,15 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.web.filter.OncePerRequestFilter;
-
 import io.github.brenovit.swipe.auth.service.JwtTokenProvider;
-import io.github.brenovit.swipe.user.model.UserDetailsImpl;
 import io.github.brenovit.swipe.user.service.UserService;
-import io.jsonwebtoken.Claims;
 
 public class JwtTokenAuthenticationFilter  {
 
@@ -54,28 +47,28 @@ public class JwtTokenAuthenticationFilter  {
         // 3. Get the token
         String token = header.replace(jwtConfig.getPrefix(), "");
 
-        if(tokenProvider.validateToken(token)) {
-            Claims claims = tokenProvider.getClaimsFromJWT(token);
-            String username = claims.getSubject();
-
-            UsernamePasswordAuthenticationToken auth =
-                    userService.findByUsername(username)
-                            .map(UserDetailsImpl::new)
-                            .map(userDetails -> {
-                                UsernamePasswordAuthenticationToken authentication =
-                                        new UsernamePasswordAuthenticationToken(
-                                                userDetails, null, userDetails.getAuthorities());
-                                authentication
-                                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                                return authentication;
-                            })
-                            .orElse(null);
-
-            SecurityContextHolder.getContext().setAuthentication(auth);
-        } else {
-            SecurityContextHolder.clearContext();
-        }
+//        if(tokenProvider.validateToken(token)) {
+//            Claims claims = tokenProvider.getClaimsFromJWT(token);
+//            String username = claims.getSubject();
+//
+//            UsernamePasswordAuthenticationToken auth =
+//                    userService.findByUsername(username)
+//                            .map(UserDetailsImpl::new)
+//                            .map(userDetails -> {
+//                                UsernamePasswordAuthenticationToken authentication =
+//                                        new UsernamePasswordAuthenticationToken(
+//                                                userDetails, null, userDetails.getAuthorities());
+//                                authentication
+//                                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+//
+//                                return authentication;
+//                            })
+//                            .orElse(null);
+//
+//            SecurityContextHolder.getContext().setAuthentication(auth);
+//        } else {
+//            SecurityContextHolder.clearContext();
+//        }
 
         // go to the next filter in the filter chain
         chain.doFilter(request, response);
