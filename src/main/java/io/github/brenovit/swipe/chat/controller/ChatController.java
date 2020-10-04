@@ -17,7 +17,7 @@ public class ChatController {
 	
 	private ChatService chatMessageService;
 
-	@MessageMapping("/chat")
+	@MessageMapping("/message")
 	public void processMessage(@Payload ChatMessage chatMessage) {
 		chatMessageService.processMessage(chatMessage);
 	}
